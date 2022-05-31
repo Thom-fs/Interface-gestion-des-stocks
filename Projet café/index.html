@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <!-- entete head -->
+  <head>
+    <meta charset="utf-8" />
+    <title>Café des amis</title>
+    <meta
+      name="description"
+      content="gestion du stock du Café du Coin d'en Bas de la Rue du Bout de la Ville d'en Face du Port"
+    />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script
+      data-search-pseudo-elements
+      src="https://kit.fontawesome.com/f737751420.js"
+      crossorigin="anonymous"
+    ></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script type="text/javascript" src="script.js" defer></script>
+  </head>
+
+  <body>
+    <!-- Container Entete -->
+    <header>
+      <div class="containerHeader">
+        <img class="logo" src="" />
+        <h1 class="titre">
+          Le Café du coin d'en bas de la rue du bout de la ville d'en face du
+          port
+        </h1>
+      </div>
+    </header>
+
+    <!-- Container affichage du stock -->
+    <section id="containerStock">
+      <h2 class="sousTitre">Gestoin des stocks</h2>
+      <div class="flex containerStock">
+        <div class="tableauStock">
+          <div class="label"><h4>Boisson fraiches</h4></div>
+          <div class="content">
+            <div id="tableau">
+              <div class="colonne entete flex">
+                <div class="cellule">Stock</div>
+                <div class="cellule">Designation</div>
+                <div class="cellule">Catégorie</div>
+                <div class="cellule">+</div>
+                <div class="cellule">-</div>
+                <div class="cellule">Supprimer</div>
+              </div>
+              <div class="tabFroid">
+                <div class="colonne flex">
+                  <h4>Pas de boisson fraiche en stock</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="label"><h4>Boissons Alcoolisées</h4></div>
+          <div class="content">
+            <div id="tableau">
+              <div class="colonne entete flex">
+                <div class="cellule">Stock</div>
+                <div class="cellule">Designation</div>
+                <div class="cellule">Catégorie</div>
+                <div class="cellule">+</div>
+                <div class="cellule">-</div>
+                <div class="cellule">Supprimer</div>
+              </div>
+              <div class="tabAlcool">
+                <div class="colonne flex">
+                  <h4>Pas de boisson Alcoolisée en stock</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="label"><h4>Boissons Chaudes</h4></div>
+          <div class="content">
+            <div id="tableau">
+              <div class="colonne entete flex">
+                <div class="cellule">Stock</div>
+                <div class="cellule">Designation</div>
+                <div class="cellule">Catégorie</div>
+                <div class="cellule">+</div>
+                <div class="cellule">-</div>
+                <div class="cellule">Supprimer</div>
+              </div>
+              <div class="tabChaud">
+                <div class="colonne flex">
+                  <h4>Pas de boisson Chaude en stock</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="alertStock">
+          <h4>Résumé de alertes</h4>
+          <div id="tableau">
+            <div class="colonne entete alerte">
+              <p>Boisson à commander</p>
+            </div>
+            <ul class="boissonCommande">
+              <li>Rien à commander</li>
+            </ul>
+          </div>
+          <div id="tableau">
+            <div class="colonne entete rupture">
+              <p>Boisson en rupture</p>
+            </div>
+            <ul class="boissonRupture flex">
+              <li>Rien en rupture</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- herite de thomDev -->
+    <!-- Container fiche produit -->
+    <section id="containerProduit">
+      <h2 class="sousTitre">Gestion Boissons</h2>
+
+      <div class="containerBoisson flex">
+        <div class="containerFiltre">
+          <div class="inputFiltre flex">
+            <div class="typeBoisson">
+              <input
+                class="selectionBoisson"
+                type="text"
+                name="selectionBoisson"
+                placeholder="Recherche par Boisson"
+              />
+            </div>
+            <button class="filtreButton">Filtrer</button>
+          </div>
+          <div class="resultatFiltre"></div>
+        </div>
+
+        <div class="containerFormulaire">
+          <form id="form">
+            <div class="nomBouton flex">
+              <!-- Nom de la boisson -->
+              <div class="nomBoisson">
+                <label></label>
+                <input
+                  class="choixBoisson"
+                  type="text"
+                  name="choixBoisson"
+                  placeholder="Nom de la Boisson"
+                  required
+                />
+              </div>
+              <!-- input Quantité -->
+              <div class="quantiteBoisson">
+                <input
+                  class="quantiteProduits"
+                  type="text"
+                  name="quantiteProduits"
+                  placeholder="Quantité en stock"
+                  required
+                />
+              </div>
+              <!-- button Ajouter/Modifier -->
+              <div class="buttonGestion">
+                <button type="submit" class="addButton">Ajouter</button>
+                <button type="submit" class="modifButton">Modifier</button>
+              </div>
+            </div>
+
+            <div class="type flex">
+              <!-- select catégorie de boisson -->
+              <div class="selectBoisson">
+                <select
+                  name="type"
+                  id="type"
+                  class="test"
+                  onchange="changementType();"
+                  required
+                >
+                  <option value="">Choisir un Type</option>
+                  <option value="choixAlcool">Boisson Alcoolisées</option>
+                  <option value="choixChaud">Boisson Chaude</option>
+                  <option value="choixFroide">Boisson Froide</option>
+                </select>
+              </div>
+
+              <div class="selectBoisson">
+                <!-- INPUT NONE BOISSON ALCOOL  -->
+                <div id="alcool" style="display: none">
+                  <select id="catAlcool" name="degreAlcool" class="degreAlcool">
+                    <option value="">Cat. boisson Alcoolisée:</option>
+                    <option value="fort">Alcool Fort</option>
+                    <option value="aperitif">Apéritif</option>
+                    <option value="cocktail">Cocktail</option>
+                  </select>
+                </div>
+                <!-- INPUT NONE BOISSON CHAUDE -->
+                <div id="chaud" style="display: none">
+                  <select id="catChaud" name="inputChaud" class="inputChaud">
+                    <option value="">Cat. boisson chaude :</option>
+                    <option value="café">Café</option>
+                    <option value="thé">Thé</option>
+                    <option value="chocolat">Chocolat</option>
+                  </select>
+                </div>
+
+                <!-- INPUT NONE BOISSON FROIDE -->
+                <div id="froid" style="display: none">
+                  <select id="catFroid" name="inputFroid" class="inputFroid">
+                    <option value="">Cat. Boisson fraiche :</option>
+                    <option value="soda">Soda</option>
+                    <option value="eauGazeuse">Eau Gazeuse</option>
+                    <option value="sirop">Sirop</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="tarifQrcode flex">
+              <div class="tarif">
+                <div class="classBoisson">
+                  <label>Prix d'achat HT</label>
+                  <input
+                    class="prixAchatHT"
+                    type="text"
+                    name="prixAchatHT"
+                    placeholder="Prix d'achat HT"
+                    onKeyUp="CalculerMontantTTC()"
+                  />
+                </div>
+                <div class="classBoisson">
+                  <label>Prix de vente HT</label>
+                  <input
+                    class="prixVenteHT"
+                    type="text"
+                    name="prixVenteHT"
+                    placeholder="Prix de vente HT"
+                    onKeyUp="CalculerMontantTTC()"
+                  />
+                </div>
+                <div class="classBoisson">
+                  <label>Prix de vente TTC</label>
+                  <input
+                    class="PrixVenteTTC"
+                    type="text"
+                    name="PrixVenteTTC"
+                    placeholder="Prix de vente TTC "
+                  />
+                </div>
+
+                <div class="classBoisson">
+                  <label>Coef. de marge HT</label>
+                  <input
+                    class="MargeHT"
+                    type="text"
+                    name="MargeHT"
+                    placeholder="Coef Marge HT"
+                  />
+                </div>
+              </div>
+              <div class="Qrcode">
+                <div id="qrcode"></div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- choix select type boisson-->
+      </div>
+    </section>
+
+    <!-- Container Footer-->
+    <footer></footer>
+  </body>
+</html>
